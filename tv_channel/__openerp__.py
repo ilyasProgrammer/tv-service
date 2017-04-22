@@ -7,9 +7,10 @@
     'website': "https://github.com/ilyasProgrammer",
     'category': 'Custom',
     'version': '0.1',
-    'depends': ['base'],
+    'depends': ['contacts'],
     'data': [
-        'views.xml',
+        'views/channel.xml',
+        'views/contacts_view_alter.xml',
     ],
     'application': True,
     'installable': True,
