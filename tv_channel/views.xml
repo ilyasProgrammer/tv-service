@@ -1,0 +1,68 @@
+<openerp>
+<data>
+    <record id="channels_form" model="ir.ui.view">
+        <field name="name">tv.channel.form</field>
+        <field name="model">tv.channel</field>
+        <field name="arch" type="xml">
+            <form string="Channels">
+                <sheet string="Channel">
+                    <h1>
+                        <field name="name" placeholder="Name ..." class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="language"/>
+                            <field name="genre"/>
+                            <field name="type"/>
+                            <field name="format"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="channels_search" model="ir.ui.view">
+        <field name="name">tv.channel.search.form</field>
+        <field name="model">tv.channel</field>
+        <field name="arch" type="xml">
+            <search string="Channels">
+                <field name="name"/>
+                <field name="language"/>
+                <field name="genre"/>
+                <field name="type"/>
+                <field name="format"/>
+            </search>
+        </field>
+    </record>
+    <record id="channels_tree" model="ir.ui.view">
+        <field name="name">tv.channel.tree</field>
+        <field name="model">tv.channel</field>
+        <field name="arch" type="xml">
+            <search string="Channels">
+                <field name="name"/>
+                <field name="language"/>
+                <field name="genre"/>
+                <field name="type"/>
+                <field name="format"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_view_channels" model="ir.actions.act_window">
+        <field name="name">Channels</field>
+        <field name="res_model">tv.channel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="channels_search"/>
+    </record>
+    <record id="open_channels_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="act_window_id" ref="action_view_channels"/>
+        <field name="view_id" ref="channels_search"/>
+    </record>
+    <!-- MENU -->
+    <!-- Top menu item -->
+    <menuitem name="TV Service" id="menu_main_tv" sequence="1"/>
+    <menuitem name="Main" id="menu_channels" parent="menu_main_tv" sequence="1"/>
+    <menuitem action="action_view_channels" id="menu_action_view_channels" parent="menu_channels" sequence="1"/>
+</data>
+</openerp>
