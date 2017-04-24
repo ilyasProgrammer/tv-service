@@ -1,4 +1,23 @@
 <openerp>
 <data>
+    <record id="view_partner_form_inh" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field eval="258" name="priority"/>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//notebook" position="inside">
+                <page string="Channels">
+                    <field name="channel_ids" nolabel="1" widget="many2many_list"/>
+                </page>
+            </xpath>
+            <field name="category_id" position="before">
+                <field name="customer_type"/>
+            </field>
+            <field name="phone" position="before">
+                <field name="service_type"/>
+            </field>
+        </field>
+    </record>
 </data>
 </openerp>

@@ -53,8 +53,7 @@
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="channels_search"/>
     </record>
-    <record id="open_channels_tree" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
+    <record id="open_channel_tree" model="ir.actions.act_window.view">
         <field name="view_mode">tree</field>
         <field name="act_window_id" ref="action_view_channels"/>
         <field name="view_id" ref="channels_search"/>
