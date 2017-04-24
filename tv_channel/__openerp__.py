@@ -8,6 +8,8 @@
     'category': 'Custom',
     'version': '0.1',
     'depends': ['contacts'],
+    'external_dependencies': {"python": ['Tkinter']},
+    # sudo apt-get install python-tk
     'data': [
         'views/channel.xml',
         'views/contacts_view_alter.xml',

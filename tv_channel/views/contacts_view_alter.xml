@@ -9,6 +9,11 @@
             <xpath expr="//sheet//notebook" position="inside">
                 <page string="Channels">
                     <field name="channel_ids" nolabel="1" widget="many2many_list"/>
+                    <div>
+                        <br/>
+                        <button name="load_channels" string="Import Channels" type="object"/>
+                        <br>Import channels form CSV file. File must contain only one column with channel names. Avoid ending spaces,quotes, tabs, commas and so on.</br>
+                    </div>
                 </page>
             </xpath>
             <field name="category_id" position="before">
