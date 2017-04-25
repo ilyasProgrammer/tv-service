@@ -21,6 +21,22 @@
             </field>
             <field name="phone" position="before">
                 <field name="service_type"/>
+                <field name="total_ch" invisible="1"/>
+                <field name="paid_ch" invisible="1"/>
+                <field name="free_ch" invisible="1"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_partner_tree_inh" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field eval="258" name="priority"/>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="total_ch"/>
+                <field name="paid_ch"/>
+                <field name="free_ch"/>
             </field>
         </field>
     </record>

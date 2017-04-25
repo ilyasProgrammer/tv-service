@@ -11,6 +11,8 @@ class TVChannel(models.Model):
     _name = 'tv.channel'
 
     name = fields.Char()
+    free = fields.Boolean('Free channel', default=True)
+    hd = fields.Boolean('HD channel', default=True)
     language = fields.Many2one('res.lang', 'Language')
     genre = fields.Selection([('sport', 'Sport'),
                               ('music', 'Music'),
@@ -40,6 +42,16 @@ class PartnerTVChannels(models.Model):
                              ('private_enterprise', 'Private enterprise'),
                              ('public_organization', 'Public organization'),
                              ('MDU', 'MDU')], 'Customer Type', default='hotel')
+    total_ch = fields.Integer('Total Channels', compute='_count_channels', store=True, help='Number of tv channels under the customer account')
+    paid_ch = fields.Integer('Pay Channels', compute='_count_channels', store=True, help='How many pay channel')
+    free_ch = fields.Integer('Free Channels', compute='_count_channels', store=True, help='How many free to air channels')
+
+    @api.one
+    @api.depends('channel_ids')
+    def _count_channels(self):
+        self.total_ch = len(self.channel_ids)
+        self.paid_ch = len(filter(lambda x: x.free is not True, self.channel_ids))
+        self.free_ch = self.total_ch - self.paid_ch
 
     @api.one
     def load_channels(self):
