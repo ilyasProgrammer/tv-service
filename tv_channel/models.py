@@ -5,6 +5,9 @@ from os.path import expanduser
 import csv
 from Tkinter import Tk
 from tkFileDialog import askopenfilename
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class TVChannel(models.Model):
@@ -18,11 +21,17 @@ class TVChannel(models.Model):
                               ('music', 'Music'),
                               ('movie', 'Movie'),
                               ('games', 'Games'),
+                              ('family', 'Family'),
+                              ('kids', 'Kids'),
+                              ('religious', 'Religious'),
+                              ('drama', 'Drama'),
                               ('news', 'News')], 'Genre')
     type = fields.Selection([('1', '1'),
                              ('2', '2'),
                              ('3', '3')], 'Channel Type')
-    format = fields.Selection([('pal', 'PAL'), ('ntsc', 'NTSC')], 'Format')
+    format = fields.Selection([('sd', 'SD'), ('hd', 'HD')], 'Format')
+    technology = fields.Selection([('analog', 'Analog'), ('iptv', 'IPTV')], 'Technology')
+    country = fields.Many2one('res.country', 'Country')
 
 
 class PartnerTVChannels(models.Model):
@@ -57,13 +66,34 @@ class PartnerTVChannels(models.Model):
     def load_channels(self):
         root = Tk()
         root.withdraw()
-        home = expanduser("~")
+        home = expanduser("~/downloads")
         channels = self.env['tv.channel']
         filename = askopenfilename(initialdir=home)
         root.destroy()
         with open(filename, 'rb') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
-            for row in spamreader:
+            spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
+            for ind, row in enumerate(spamreader):
+                if ind == 0:
+                    continue
                 found = channels.search([('name', '=', row[0].strip())], limit=1)
                 if len(found):
                     self.channel_ids += found
+                else:
+                    language = self.env['res.lang'].search([('name', '=', row[1].strip())])
+                    country = self.env['res.country'].search([('name', '=', row[5].strip())])
+                    vals = {'name': row[0].strip(),
+                            'free': bool(row[3].strip()),
+                            'hd': bool(row[7].strip()),
+                            'language': language.id if language else None,
+                            'genre': row[2].strip().lower(),
+                            'type': row[8].strip(),
+                            'format': row[4].strip().lower(),
+                            'technology': row[6].strip().lower(),
+                            'country': country.id if country else None,
+                            }
+                    try:
+                        new_ch = channels.create(vals)
+                        self.channel_ids += new_ch
+                    except:
+                        _logger.error("Wrong line %s in file", ind)
+                    _logger.info("New channel created: %s", new_ch.name)

@@ -23,4 +23,3 @@ class ChannelsVSPartners(models.Model):
             LEFT JOIN tv_channel t ON (r.tv_channel_id = t.id)
             )
         """)
-

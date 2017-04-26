@@ -6,8 +6,8 @@
         <field eval="258" name="priority"/>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet//notebook" position="inside">
-                <page string="Channels">
+            <xpath expr="//notebook/page[1]" position="before">
+                <page string="Channels" autofocus="autofocus">
                     <field name="channel_ids" nolabel="1" widget="many2many_list"/>
                     <div>
                         <br/>
@@ -16,14 +16,19 @@
                     </div>
                 </page>
             </xpath>
-            <field name="category_id" position="before">
-                <field name="customer_type"/>
+            <field name="name" position="after">
+                <h4>
+                    <group>
+                        <field name="id"/>
+                        <field name="customer_type"/>
+                    </group>
+                </h4>
             </field>
             <field name="phone" position="before">
                 <field name="service_type"/>
                 <field name="total_ch" invisible="1"/>
-                <field name="paid_ch" invisible="1"/>
                 <field name="free_ch" invisible="1"/>
+                <field name="paid_ch" invisible="1"/>
             </field>
         </field>
     </record>
@@ -33,10 +38,21 @@
         <field eval="258" name="priority"/>
         <field name="inherit_id" ref="base.view_partner_tree"/>
         <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="id"/>
+                <field name="customer_type"/>
+            </field>
             <field name="email" position="after">
                 <field name="total_ch"/>
                 <field name="paid_ch"/>
                 <field name="free_ch"/>
+                <field name="service_type"/>
+            </field>
+            <field name="email" position="replace">
+                <field name="email" invisible="1"/>
+            </field>
+            <field name="phone" position="replace">
+                <field name="phone" invisible="1"/>
             </field>
         </field>
     </record>
