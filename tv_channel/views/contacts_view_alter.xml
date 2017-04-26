@@ -8,11 +8,21 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook/page[1]" position="before">
                 <page string="Channels" autofocus="autofocus">
-                    <field name="channel_ids" nolabel="1" widget="many2many_list"/>
+                    <field name="channel_ids" nolabel="1" widget="many2many_list">
+                        <tree>
+                            <field name="name"/>
+                            <field name="free"/>
+                            <field name="hd"/>
+                            <field name="language"/>
+                            <field name="genre"/>
+                            <field name="type"/>
+                            <field name="format"/>
+                        </tree>
+                    </field>
                     <div>
                         <br/>
                         <button name="load_channels" string="Import Channels" type="object"/>
-                        <br>Import channels form CSV file. File must contain only one column with channel names. Avoid ending spaces,quotes, tabs, commas and so on.</br>
+                        <br>Import channels form CSV file</br>
                     </div>
                 </page>
             </xpath>
