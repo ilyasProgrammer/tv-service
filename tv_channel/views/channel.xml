@@ -11,9 +11,7 @@
                     </h1>
                     <group>
                         <group>
-                            <field name="free"/>
                             <field name="technology"/>
-                            <field name="hd"/>
                             <field name="country"/>
                             <field name="language"/>
                             <field name="genre"/>
@@ -31,8 +29,6 @@
         <field name="arch" type="xml">
             <search string="Channels">
                 <field name="name"/>
-                <field name="free"/>
-                <field name="hd"/>
                 <field name="language"/>
                 <field name="genre"/>
                 <field name="type"/>
@@ -46,8 +42,6 @@
         <field name="arch" type="xml">
             <search string="Channels">
                 <field name="name"/>
-                <field name="free"/>
-                <field name="hd"/>
                 <field name="language"/>
                 <field name="genre"/>
                 <field name="type"/>

@@ -14,8 +14,8 @@ class TVChannel(models.Model):
     _name = 'tv.channel'
 
     name = fields.Char()
-    free = fields.Boolean('Free channel', default=True)
-    hd = fields.Boolean('HD channel', default=True)
+    # free = fields.Boolean('Free channel', default=True)
+    # hd = fields.Boolean('HD channel', default=True)
     language = fields.Many2one('res.lang', 'Language')
     genre = fields.Selection([('sport', 'Sport'),
                               ('music', 'Music'),
@@ -26,9 +26,8 @@ class TVChannel(models.Model):
                               ('religious', 'Religious'),
                               ('drama', 'Drama'),
                               ('news', 'News')], 'Genre')
-    type = fields.Selection([('1', '1'),
-                             ('2', '2'),
-                             ('3', '3')], 'Channel Type')
+    type = fields.Selection([('fta', 'FTA'),
+                             ('pay', 'Pay')], 'Channel Type')
     format = fields.Selection([('sd', 'SD'), ('hd', 'HD')], 'Format')
     technology = fields.Selection([('analog', 'Analog'), ('iptv', 'IPTV')], 'Technology')
     country = fields.Many2one('res.country', 'Country')
@@ -59,14 +58,14 @@ class PartnerTVChannels(models.Model):
     @api.depends('channel_ids')
     def _count_channels(self):
         self.total_ch = len(self.channel_ids)
-        self.paid_ch = len(filter(lambda x: x.free is not True, self.channel_ids))
-        self.free_ch = self.total_ch - self.paid_ch
+        self.paid_ch = len(filter(lambda x: x.type == 'pay', self.channel_ids))
+        self.free_ch = len(filter(lambda x: x.type == 'fta', self.channel_ids))
 
     @api.one
     def load_channels(self):
         root = Tk()
         root.withdraw()
-        home = expanduser("~/downloads")
+        home = expanduser("~")
         channels = self.env['tv.channel']
         filename = askopenfilename(initialdir=home)
         root.destroy()
@@ -82,11 +81,9 @@ class PartnerTVChannels(models.Model):
                     language = self.env['res.lang'].search([('name', '=', row[1].strip())])
                     country = self.env['res.country'].search([('name', '=', row[5].strip())])
                     vals = {'name': row[0].strip(),
-                            'free': bool(row[3].strip()),
-                            'hd': bool(row[7].strip()),
                             'language': language.id if language else None,
                             'genre': row[2].strip().lower(),
-                            'type': row[8].strip(),
+                            'type': row[3].strip().lower(),
                             'format': row[4].strip().lower(),
                             'technology': row[6].strip().lower(),
                             'country': country.id if country else None,
@@ -94,6 +91,6 @@ class PartnerTVChannels(models.Model):
                     try:
                         new_ch = channels.create(vals)
                         self.channel_ids += new_ch
+                        _logger.info("New channel created: %s", new_ch.name)
                     except:
                         _logger.error("Wrong line %s in file", ind)
-                    _logger.info("New channel created: %s", new_ch.name)

@@ -11,8 +11,6 @@
                     <field name="channel_ids" nolabel="1" widget="many2many_list">
                         <tree>
                             <field name="name"/>
-                            <field name="free"/>
-                            <field name="hd"/>
                             <field name="language"/>
                             <field name="genre"/>
                             <field name="type"/>
