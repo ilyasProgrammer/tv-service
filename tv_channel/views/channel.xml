@@ -92,22 +92,29 @@
         </field>
     </record>
     <!-- REPORTS -->
-    <record id="cvsp_graph" model="ir.ui.view">
-         <field name="name">channels.vs.partners.graph</field>
+    <record id="cvsp_tree" model="ir.ui.view">
+         <field name="name">channels.vs.partners.tree</field>
          <field name="model">channels.vs.partners</field>
          <field name="arch" type="xml">
-             <graph string="channels.vs.partners" type="pivot" stacked="True">
-                 <field name="channel" type="row"/>
-                 <field name="partner" type="col"/>
-             </graph>
+             <tree>
+                 <field name="channel"/>
+                 <field name="partner"/>
+                 <field name="qty"/>
+                 <field name="language"/>
+                 <field name="genre"/>
+                 <field name="type"/>
+                 <field name="format"/>
+                 <field name="technology"/>
+                 <field name="country"/>
+             </tree>
          </field>
     </record>
     <record id="act_cvsp" model="ir.actions.act_window">
         <field name="name">ChannelsVSPartners</field>
         <field name="res_model">channels.vs.partners</field>
         <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="view_id" ref="cvsp_graph"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="cvsp_tree"/>
     </record>
     <!-- MENU -->
     <menuitem action="act_cvsp" id="menu_action_act_cvsp" parent="menu_channels" sequence="9"/>
