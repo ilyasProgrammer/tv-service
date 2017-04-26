@@ -9,7 +9,7 @@ class ChannelsVSPartners(models.Model):
     _auto = False
     channel = fields.Many2one('tv.channel', string='Channel', readonly=True)
     partner = fields.Char(string='Partners', readonly=True)
-    qty = fields.Integer(string='Quantity', readonly=True)
+    # qty = fields.Integer(string='Quantity', readonly=True)
     language = fields.Many2one('res.lang', 'Language')
     genre = fields.Char(string='Genre')
     type = fields.Char(string='Type')
@@ -21,11 +21,10 @@ class ChannelsVSPartners(models.Model):
         tools.drop_view_if_exists(cr, 'channels_vs_partners')
         cr.execute("""
             create or replace view channels_vs_partners as (
-            SELECT 
-                r.tv_channel_id as id, 
+           	SELECT 
+		        row_number() over (order by p.name nulls last) as id,
                 r.tv_channel_id as channel, 
-                string_agg(p.name, ', ') as partner , 
-                COUNT(*) as qty,
+                p.name as partner, 
                 t.language,
                 t.genre,
                 t.type,
@@ -36,12 +35,6 @@ class ChannelsVSPartners(models.Model):
             LEFT JOIN res_partner p ON (r.res_partner_id = p.id)
             LEFT JOIN tv_channel t ON (r.tv_channel_id = t.id)
             LEFT JOIN res_country c ON (t.country = c.id)
-            group by r.tv_channel_id, t.language,
-                t.genre,
-                t.type,
-                t.format,
-                t.technology,
-                c.name
-            order by id
+           order by channel
             )
         """)
