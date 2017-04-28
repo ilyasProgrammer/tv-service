@@ -8,7 +8,7 @@ class ChannelsVSPartners(models.Model):
     _name = "channels.vs.partners"
     _auto = False
     channel = fields.Many2one('tv.channel', string='Channel', readonly=True)
-    partner = fields.Char(string='Partners', readonly=True)
+    partner = fields.Char(string='Customers', readonly=True)
     # qty = fields.Integer(string='Quantity', readonly=True)
     language = fields.Many2one('res.lang', 'Language')
     genre = fields.Char(string='Genre')

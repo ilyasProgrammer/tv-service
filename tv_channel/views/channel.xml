@@ -123,7 +123,7 @@
                  <field name="country"/>
                  <group expand="0" string="Group By">
                        <filter string="channel" context="{'group_by': 'channel'}"/>
-                       <filter string="partner" context="{'group_by': 'language'}"/>
+                       <filter string="partner" context="{'group_by': 'partner'}"/>
                        <filter string="language" context="{'group_by': 'language'}"/>
                        <filter string="genre" context="{'group_by': 'genre'}"/>
                        <filter string="type" context="{'group_by': 'type'}"/>
@@ -145,11 +145,11 @@
         <!--<field name="view_id" ref="cvsp_tree"/>-->
     </record>
     <!-- MENU -->
-    <menuitem action="act_cvsps" id="menu_action_act_cvsp" parent="menu_channels" sequence="9"/>
     <!-- Top menu item -->
     <menuitem name="TV Service" id="menu_main_tv" sequence="1"/>
     <menuitem name="Main" id="menu_channels" parent="menu_main_tv" sequence="1"/>
     <menuitem id="menu_partner_form" parent="menu_channels" action="action_partner_tree_tv" sequence="1"/>
     <menuitem action="action_view_channels" id="menu_action_view_channels" parent="menu_channels" sequence="2"/>
+    <menuitem action="act_cvsps" id="menu_action_act_cvsp" parent="menu_channels" sequence="9"/>
 </data>
 </openerp>
