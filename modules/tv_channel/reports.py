@@ -11,10 +11,10 @@ class ChannelsVSPartners(models.Model):
     partner = fields.Char(string='Customers', readonly=True)
     # qty = fields.Integer(string='Quantity', readonly=True)
     language = fields.Many2one('res.lang', 'Language')
-    genre = fields.Char(string='Genre')
-    type = fields.Char(string='Type')
-    format = fields.Char(string='Format')
-    technology = fields.Char(string='Technology')
+    genre = fields.Many2one('tv.genre', 'Genre')
+    type = fields.Many2one('tv.type', 'Channel Type')
+    format = fields.Many2one('tv.format', 'Format')
+    technology = fields.Many2one('tv.technology', 'Technology')
     country = fields.Char(string='Country')
 
     def init(self, cr):

@@ -14,22 +14,11 @@ class TVChannel(models.Model):
     _name = 'tv.channel'
 
     name = fields.Char()
-    # free = fields.Boolean('Free channel', default=True)
-    # hd = fields.Boolean('HD channel', default=True)
     language = fields.Many2one('res.lang', 'Language')
-    genre = fields.Selection([('sport', 'Sport'),
-                              ('music', 'Music'),
-                              ('movie', 'Movie'),
-                              ('games', 'Games'),
-                              ('family', 'Family'),
-                              ('kids', 'Kids'),
-                              ('religious', 'Religious'),
-                              ('drama', 'Drama'),
-                              ('news', 'News')], 'Genre')
-    type = fields.Selection([('fta', 'FTA'),
-                             ('pay', 'Pay')], 'Channel Type')
-    format = fields.Selection([('sd', 'SD'), ('hd', 'HD')], 'Format')
-    technology = fields.Selection([('analog', 'Analog'), ('iptv', 'IPTV')], 'Technology')
+    genre = fields.Many2one('tv.genre', 'Genre')
+    type = fields.Many2one('tv.type', 'Channel Type')
+    format = fields.Many2one('tv.format', 'Format')
+    technology = fields.Many2one('tv.technology', 'Technology')
     country = fields.Many2one('res.country', 'Country')
 
 
@@ -37,19 +26,7 @@ class PartnerTVChannels(models.Model):
     _inherit = 'res.partner'
 
     channel_ids = fields.Many2many('tv.channel')
-    service_type = fields.Selection([('direct_reception', 'Direct reception'),
-                                     ('IPTV', 'IPTV'),
-                                     ('OTT', 'OTT')], 'Service Type')
-    customer_type = fields.Selection([('hotel', 'Hotel'),
-                             ('resort', 'Resort'),
-                             ('hospital', 'Hospital'),
-                             ('clinic', 'Clinic'),
-                             ('IPTV', 'IPTV operator'),
-                             ('OTT', 'OTT operator'),
-                             ('compound', 'Compound '),
-                             ('private_enterprise', 'Private enterprise'),
-                             ('public_organization', 'Public organization'),
-                             ('MDU', 'MDU')], 'Customer Type', default='hotel')
+    service_type = fields.Many2one('partner_service_type', 'Service Type')
     total_ch = fields.Integer('Total Channels', compute='_count_channels', store=True, help='Number of tv channels under the customer account')
     paid_ch = fields.Integer('Pay Channels', compute='_count_channels', store=True, help='How many pay channel')
     free_ch = fields.Integer('Free Channels', compute='_count_channels', store=True, help='How many free to air channels')
@@ -58,8 +35,8 @@ class PartnerTVChannels(models.Model):
     @api.depends('channel_ids')
     def _count_channels(self):
         self.total_ch = len(self.channel_ids)
-        self.paid_ch = len(filter(lambda x: x.type == 'pay', self.channel_ids))
-        self.free_ch = len(filter(lambda x: x.type == 'fta', self.channel_ids))
+        self.paid_ch = len(filter(lambda x: x.type.name.lower() == 'pay', self.channel_ids))
+        self.free_ch = len(filter(lambda x: x.type.name.lower() == 'fta', self.channel_ids))
 
     @api.one
     def load_channels(self):
@@ -80,12 +57,16 @@ class PartnerTVChannels(models.Model):
                 else:
                     language = self.env['res.lang'].search([('name', '=', row[1].strip())])
                     country = self.env['res.country'].search([('name', '=', row[5].strip())])
+                    genre = self.env['tv.genre'].search([('name', '=', row[2].strip())])
+                    tv_type = self.env['tv.type'].search([('name', '=', row[3].strip())])
+                    tv_format = self.env['tv.format'].search([('name', '=', row[4].strip())])
+                    technology = self.env['tv.technology'].search([('name', '=', row[6].strip())])
                     vals = {'name': row[0].strip(),
                             'language': language.id if language else None,
-                            'genre': row[2].strip().lower(),
-                            'type': row[3].strip().lower(),
-                            'format': row[4].strip().lower(),
-                            'technology': row[6].strip().lower(),
+                            'genre':  genre.id if genre else None,
+                            'type':  tv_type.id if tv_type else None,
+                            'format':  tv_format.id if tv_format else None,
+                            'technology':  technology.id if technology else None,
                             'country': country.id if country else None,
                             }
                     try:
@@ -94,3 +75,29 @@ class PartnerTVChannels(models.Model):
                         _logger.info("New channel created: %s", new_ch.name)
                     except:
                         _logger.error("Wrong line %s in file", ind)
+
+
+class TvGenre(models.Model):
+    _name = 'tv.genre'
+    name = fields.Char()
+
+
+class TvType(models.Model):
+    _name = 'tv.type'
+    name = fields.Char()
+
+
+class TvFormat(models.Model):
+    _name = 'tv.format'
+    name = fields.Char()
+
+
+class TvTechnology(models.Model):
+    _name = 'tv.technology'
+    name = fields.Char()
+
+
+class ServiceType(models.Model):
+    _name = 'partner_service_type'
+    name = fields.Char()
+

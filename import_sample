@@ -1,0 +1,27 @@
+TV channels,Language ,Genre ,free,Format ,country ,Technology
+Channel name 7,English ,Drama,FTA,HD,USA,IPTV
+Channel name 8,Arabic,Drama,FTA,HD,USA,IPTV
+Channel name 9,Arabic,Drama,Pay ,HD,USA,IPTV
+Channel name 10,Arabic,Drama,FTA,HD,USA,IPTV
+Channel name 11,Arabic,Drama,Pay ,HD,USA,IPTV
+Channel name 12,Arabic,Drama,Pay ,HD,UAE,IPTV
+Channel name 1,Arabic,Family ,FTA,SD,USA,IPTV
+Channel name 23,Russian,Family ,FTA,SD,Russia,IPTV
+Channel name 24,Russian,Family ,Pay ,SD,Russia,IPTV
+Channel name 25,Russian,Family ,FTA,SD,Russia,IPTV
+Channel name 26,Russian,Family ,Pay ,SD,Russia,IPTV
+Channel name 2,Arabic,kids,Pay ,HD,USA,IPTV
+Channel name 3,Arabic,kids,FTA,HD,USA,IPTV
+Channel name 4,Arabic,kids,FTA,HD,USA,IPTV
+Channel name 5,English ,kids,Pay ,HD,USA,IPTV
+Channel name 6,English ,kids,FTA,HD,USA,IPTV
+Channel name 13,English ,News,Pay ,HD,UAE,IPTV
+Channel name 14,English ,News,Pay ,HD,UAE,IPTV
+Channel name 15,English ,News,FTA,SD,UAE,IPTV
+Channel name 16,Arabic,News,FTA,SD,UAE,IPTV
+Channel name 17,Arabic,News,Pay ,SD,UAE,IPTV
+Channel name 18,Arabic,News,FTA,SD,UAE,IPTV
+Channel name 20,French ,News,Pay ,SD,france,IPTV
+Channel name 22,Russian,News,Pay ,SD,Russia,IPTV
+Channel name 21,French ,religious,FTA,SD,Qatar,IPTV
+Channel name 19,Arabic,Sport ,FTA,SD,Jordan,IPTV
