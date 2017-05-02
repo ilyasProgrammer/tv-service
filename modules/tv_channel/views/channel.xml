@@ -11,7 +11,7 @@
                     </h1>
                     <group>
                         <group>
-                            <field name="technology"/>
+                            <field name="technology" string="Signal Reception"/>
                             <field name="country"/>
                             <field name="language"/>
                             <field name="genre"/>
@@ -103,7 +103,7 @@
                  <field name="genre"/>
                  <field name="type"/>
                  <field name="format"/>
-                 <field name="technology"/>
+                 <field name="technology" string="Signal Reception"/>
                  <field name="country"/>
              </tree>
          </field>
@@ -119,7 +119,7 @@
                  <field name="genre"/>
                  <field name="type"/>
                  <field name="format"/>
-                 <field name="technology"/>
+                 <field name="technology" string="Signal Reception"/>
                  <field name="country"/>
                  <group expand="0" string="Group By">
                        <filter string="channel" context="{'group_by': 'channel'}"/>
@@ -128,7 +128,7 @@
                        <filter string="genre" context="{'group_by': 'genre'}"/>
                        <filter string="type" context="{'group_by': 'type'}"/>
                        <filter string="format" context="{'group_by': 'format'}"/>
-                       <filter string="technology" context="{'group_by': 'technology'}"/>
+                       <filter string="Signal Reception" context="{'group_by': 'technology'}"/>
                        <filter string="country" context="{'group_by': 'country'}"/>
                  </group>
              </search>

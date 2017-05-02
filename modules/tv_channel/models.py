@@ -18,7 +18,7 @@ class TVChannel(models.Model):
     genre = fields.Many2one('tv.genre', 'Genre')
     type = fields.Many2one('tv.type', 'Channel Type')
     format = fields.Many2one('tv.format', 'Format')
-    technology = fields.Many2one('tv.technology', 'Technology')
+    technology = fields.Many2one('tv.technology', 'Signal Reception')
     country = fields.Many2one('res.country', 'Country')
 
 
