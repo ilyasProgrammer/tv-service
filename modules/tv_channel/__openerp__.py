@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
     'name': "tv_channel",
-    'summary': """TV channel model""",
-    'description': """TV channel model""",
+    'summary': """TV service""",
+    'description': """TV service""",
     'author': "Ilyas",
     'website': "https://github.com/ilyasProgrammer",
     'category': 'Custom',
-    'version': '0.1',
+    'version': '1.1',
     'depends': ['contacts'],
     'external_dependencies': {"python": ['Tkinter']},
     # sudo apt-get install python-tk
