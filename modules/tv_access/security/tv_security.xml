@@ -1,43 +1,215 @@
 <openerp>
 <data noupdate="0">
-    <record id="group_tv_admin" model="res.groups">
-        <field name="name">group_tv_admin</field>
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    <record model="ir.module.category" id="tv">
+        <field name="name">TV</field>
+        <field name="sequence">10</field>
     </record>
-    <record id="group_tv_director" model="res.groups">
-        <field name="name">group_tv_director</field>
+    <record model="ir.module.category" id="res_partner">
+        <field name="name">res_partner</field>
+        <field name="sequence">11</field>
     </record>
-    <record id="group_tv_manager" model="res.groups">
-        <field name="name">group_tv_manager</field>
+    <record model="ir.module.category" id="crm_lead">
+        <field name="name">crm_lead</field>
+        <field name="sequence">12</field>
     </record>
-    <record id="group_tv_user" model="res.groups">
-        <field name="name">group_tv_user</field>
+    <record model="ir.module.category" id="sale_order">
+        <field name="name">sale_order</field>
+        <field name="sequence">13</field>
+    </record>
+    <record model="ir.module.category" id="sb_media_contract">
+        <field name="name">sb_media_contract</field>
+        <field name="sequence">14</field>
+    </record>
+    <record model="ir.module.category" id="project_project">
+        <field name="name">project_project</field>
+        <field name="sequence">15</field>
+    </record>
+    <record model="ir.module.category" id="project_task">
+        <field name="name">project_task</field>
+        <field name="sequence">16</field>
+    </record>
+    <record model="ir.module.category" id="account_invoice">
+        <field name="name">account_invoice</field>
+        <field name="sequence">17</field>
+    </record>
+    <record model="ir.module.category" id="account_invoice">
+        <field name="name">account_invoice</field>
+        <field name="sequence">17</field>
+    </record>
+    <record model="ir.module.category" id="purchase_order">
+        <field name="name">purchase_order</field>
+        <field name="sequence">18</field>
+    </record>
+    <record model="ir.module.category" id="stock_inventory">
+        <field name="name">stock_inventory</field>
+        <field name="sequence">19</field>
+    </record>
+    <record model="ir.module.category" id="hr_employee">
+        <field name="name">hr_employee</field>
+        <field name="sequence">20</field>
     </record>
 </data>
 <data noupdate="0">
-    <record model="ir.rule" id="tv_visibility_group_tv_user">
-        <field name="name">Own records group_tv_user</field>
+    <record id="tv_admin" model="res.groups">
+        <field name="name">tv_admin</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="category_id" ref="tv"/>
+    </record>
+    <record id="tv_director" model="res.groups">
+        <field name="name">tv_director</field>
+        <field name="category_id" ref="tv"/>
+    </record>
+    <record id="tv_manager" model="res.groups">
+        <field name="name">tv_manager</field>
+        <field name="category_id" ref="tv"/>
+    </record>
+    <record id="tv_user" model="res.groups">
+        <field name="name">tv_user</field>
+        <field name="category_id" ref="tv"/>
+    </record>
+
+    <record id="res_partner_director" model="res.groups">
+        <field name="name">res_partner_director</field>
+        <field name="category_id" ref="res_partner"/>
+    </record>
+    <record id="res_partner_manager" model="res.groups">
+        <field name="name">res_partner_manager</field>
+        <field name="category_id" ref="res_partner"/>
+    </record>
+    <record id="res_partner_user" model="res.groups">
+        <field name="name">res_partner_user</field>
+        <field name="category_id" ref="res_partner"/>
+    </record>
+
+    <record id="crm_lead_director" model="res.groups">
+        <field name="name">crm_lead_director</field>
+        <field name="category_id" ref="crm_lead"/>
+    </record>
+    <record id="crm_lead_manager" model="res.groups">
+        <field name="name">crm_lead_manager</field>
+        <field name="category_id" ref="crm_lead"/>
+    </record>
+    <record id="crm_lead_user" model="res.groups">
+        <field name="name">crm_lead_user</field>
+        <field name="category_id" ref="crm_lead"/>
+    </record>
+
+    <record id="sale_order_director" model="res.groups">
+        <field name="name">sale_order_director</field>
+        <field name="category_id" ref="sale_order"/>
+    </record>
+    <record id="sale_order_manager" model="res.groups">
+        <field name="name">sale_order_manager</field>
+        <field name="category_id" ref="sale_order"/>
+    </record>
+    <record id="sale_order_user" model="res.groups">
+        <field name="name">sale_order_user</field>
+        <field name="category_id" ref="sale_order"/>
+    </record>
+
+    <record id="project_project_director" model="res.groups">
+        <field name="name">project_project_director</field>
+        <field name="category_id" ref="project_project"/>
+    </record>
+    <record id="project_project_manager" model="res.groups">
+        <field name="name">project_project_manager</field>
+        <field name="category_id" ref="project_project"/>
+    </record>
+    <record id="project_project_user" model="res.groups">
+        <field name="name">project_project_user</field>
+        <field name="category_id" ref="project_project"/>
+    </record>
+
+    <record id="project_task_director" model="res.groups">
+        <field name="name">project_task_director</field>
+        <field name="category_id" ref="project_task"/>
+    </record>
+    <record id="project_task_manager" model="res.groups">
+        <field name="name">project_task_manager</field>
+        <field name="category_id" ref="project_task"/>
+    </record>
+    <record id="project_task_user" model="res.groups">
+        <field name="name">project_task_user</field>
+        <field name="category_id" ref="project_task"/>
+    </record>
+
+    <record id="account_invoice_director" model="res.groups">
+        <field name="name">account_invoice_director</field>
+        <field name="category_id" ref="account_invoice"/>
+    </record>
+    <record id="account_invoice_manager" model="res.groups">
+        <field name="name">account_invoice_manager</field>
+        <field name="category_id" ref="account_invoice"/>
+    </record>
+    <record id="account_invoice_user" model="res.groups">
+        <field name="name">account_invoice_user</field>
+        <field name="category_id" ref="account_invoice"/>
+    </record>
+
+    <record id="purchase_order_director" model="res.groups">
+        <field name="name">purchase_order_director</field>
+        <field name="category_id" ref="purchase_order"/>
+    </record>
+    <record id="purchase_order_manager" model="res.groups">
+        <field name="name">purchase_order_manager</field>
+        <field name="category_id" ref="purchase_order"/>
+    </record>
+    <record id="purchase_order_user" model="res.groups">
+        <field name="name">purchase_order_user</field>
+        <field name="category_id" ref="purchase_order"/>
+    </record>
+
+    <record id="stock_inventory_director" model="res.groups">
+        <field name="name">stock_inventory_director</field>
+        <field name="category_id" ref="stock_inventory"/>
+    </record>
+    <record id="stock_inventory_manager" model="res.groups">
+        <field name="name">stock_inventory_manager</field>
+        <field name="category_id" ref="stock_inventory"/>
+    </record>
+    <record id="stock_inventory_user" model="res.groups">
+        <field name="name">stock_inventory_user</field>
+        <field name="category_id" ref="stock_inventory"/>
+    </record>
+
+    <record id="hr_employee_director" model="res.groups">
+        <field name="name">hr_employee_director</field>
+        <field name="category_id" ref="hr_employee"/>
+    </record>
+    <record id="hr_employee_manager" model="res.groups">
+        <field name="name">hr_employee_manager</field>
+        <field name="category_id" ref="hr_employee"/>
+    </record>
+    <record id="hr_employee_user" model="res.groups">
+        <field name="name">hr_employee_user</field>
+        <field name="category_id" ref="hr_employee"/>
+    </record>
+
+</data>
+<data noupdate="0">
+    <record model="ir.rule" id="tv_visibility_tv_user">
+        <field name="name">Own records tv_user</field>
         <field name="model_id" ref="tv_channel.model_tv_channel"/>
         <field name="domain_force">
             [
                 ('create_uid', '=', user.id),
             ]
         </field>
-        <field name="groups" eval="[(4,ref('group_tv_user'))]"/>
+        <field name="groups" eval="[(4,ref('tv_user'))]"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="0"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="0"/>
     </record>
-    <record model="ir.rule" id="tv_visibility_group_tv_manager">
-        <field name="name">Own records group_tv_manager</field>
+    <record model="ir.rule" id="tv_visibility_tv_manager">
+        <field name="name">Own records tv_manager</field>
         <field name="model_id" ref="tv_channel.model_tv_channel"/>
         <field name="domain_force">
             [
                 ('create_uid', '=', user.id),
             ]
         </field>
-        <field name="groups" eval="[(4,ref('group_tv_manager'))]"/>
+        <field name="groups" eval="[(4,ref('tv_manager'))]"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>
@@ -46,3 +218,17 @@
 </data>
 
 </openerp>
+
+
+    <!--<record id="sb_media_contract_director" model="res.groups">-->
+        <!--<field name="name">sb_media_contract_director</field>-->
+        <!--<field name="category_id" ref="sb_media_contract"/>-->
+    <!--</record>-->
+    <!--<record id="sb_media_contract_manager" model="res.groups">-->
+        <!--<field name="name">sb_media_contract_manager</field>-->
+        <!--<field name="category_id" ref="sb_media_contract"/>-->
+    <!--</record>-->
+    <!--<record id="sb_media_contract_user" model="res.groups">-->
+        <!--<field name="name">sb_media_contract_user</field>-->
+        <!--<field name="category_id" ref="sb_media_contract"/>-->
+    <!--</record>-->
